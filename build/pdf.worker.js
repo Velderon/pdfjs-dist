@@ -38304,6 +38304,9 @@ var PartialEvaluator = (function PartialEvaluatorClosure() {
           textState.translateTextMatrix(tx, ty);
 
           textChunk.str.push(glyphUnicode);
+          if (charSpacing >= textChunk.spaceWidth * SPACE_FACTOR) {
+            textChunk.str.push(' ');
+          }
         }
 
         if (!font.vertical) {
@@ -38312,9 +38315,6 @@ var PartialEvaluator = (function PartialEvaluatorClosure() {
         } else {
           textChunk.lastAdvanceHeight = height;
           textChunk.height += Math.abs(height * textChunk.textAdvanceScale);
-        }
-        if (charSpacing >= textChunk.spaceWidth * SPACE_FACTOR) {
-          textChunk.str.push(' ');
         }
         addSpaceIfNecessary(textChunk, font);
 
